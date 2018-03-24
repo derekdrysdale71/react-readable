@@ -1,30 +1,35 @@
 import * as API from '../utils/api';
 
+//
 // Actions
+//
+
+// Categories
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
+
+// Posts
+export const GET_POST = 'GET_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY';
 export const CREATE_POST = 'CREATE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const DELETE_POST = 'DELETE_POST';
-export const VOTE_POST = 'VOTE_POST';
-export const GET_POST = 'GET_POST';
+export const UP_VOTE_POST = 'UP_VOTE_POST';
+export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
+export const SET_POST_TO_EDIT = 'SET_POST_TO_EDIT';
+
+// Comments
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const VOTE_COMMENT = 'VOTE_COMMENT';
-export const SORT_BY_POSTS = 'SORT_BY_POSTS';
+export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
+export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
 export const SET_COMMENT_TO_EDIT = 'SET_COMMENT_TO_EDIT';
-export const SET_POST_TO_EDIT = 'SET_POST_TO_EDIT';
 
-// Filters
+// Filters/Sorts
 export const FILTER_BY_CATEGORY = 'FILTER_BY_CATEGORY';
-export const SORT_BY_TIMESTAMP_DESC = 'SORT_BY_TIMESTAMP_DESC';
-export const SORT_BY_TIMESTAMP_ASC = 'SORT_BY_TIMESTAMP_ASC';
-export const SORT_BY_VOTESCORE_DESC = 'SORT_BY_VOTESCORE_DESC';
-export const SORT_BY_VOTESCORE_ASC = 'SORT_BY_VOTESCORE_ASC';
 
 //
 // Category
@@ -65,29 +70,3 @@ export const filterPostsByCategory = (category = 'all') => ({
   category
 });
 
-export const sortByTimestameDesc = () => ({
-  type: SORT_BY_TIMESTAMP_DESC,
-});
-
-export const sortByTimestameAsc = () => ({
-  type: SORT_BY_TIMESTAMP_ASC,
-});
-
-export const sortByVoteScoreDesc = () => ({
-  type: SORT_BY_VOTESCORE_DESC,
-});
-
-export const sortByVoteScoreAsc = () => ({
-  type: SORT_BY_VOTESCORE_ASC,
-});
-
-export const getPostsByCategory = posts => ({
-  type: GET_POSTS_BY_CATEGORY,
-  posts
-});
-
-export const fetchPostsByCategory = category => dispatch => (
-  API
-    .getPostsByCategory(category)
-    .then(data => dispatch(getPostsByCategory(data)))
-);

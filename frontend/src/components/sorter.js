@@ -1,21 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import filteredPosts from '../selectors/posts';
 
 const Sorter = props => (
-  <div className="">
-    <span className="">Sort by:</span>
-    <select defaultValue={props.sortBy} onChange="">
-      <option value="+voteScore">VoteScore Asc</option>
-      <option value="-voteScore">VoteScore Desc</option>
-      <option value="+timestamp">Timestamp Asc</option>
-      <option value="-timestamp">Timestamp Desc</option>
-    </select>
-  </div>
+    <div>
+        <span className="">Sort by:</span>
+        <select defaultValue="-timestamp" onChange={props.handleSort} >
+            <option value="-timestamp">Timestamp Desc</option>
+            <option value="+timestamp">Timestamp Asc</option>
+            <option value="-voteScore">VoteScore Desc</option>
+            <option value="+voteScore">VoteScore Asc</option>
+        </select>
+    </div>
 );
 
-const mapDispatchToProps = dispatch => ({
-  //setCategory: category => dispatch(selectCategory(category))
-});
+Sorter.propTypes = {
+    handleSort: PropTypes.func.isRequired
+};
 
-export default connect(null, mapDispatchToProps)(Sorter);
+export default connect()(Sorter);

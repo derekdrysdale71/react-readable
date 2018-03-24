@@ -8,7 +8,7 @@ const styles = {
 };
 
 const Header = () => (
-  <nav className="ui huge menu">
+  <nav className="navbar navbar-dark bg-dark">
     <a href="/" className="navbar-brand">readable</a>
   </nav>
 );

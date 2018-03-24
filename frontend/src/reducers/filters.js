@@ -1,10 +1,5 @@
-import {
-  FILTER_BY_CATEGORY,
-  SORT_BY_TIMESTAMP_DESC,
-  SORT_BY_TIMESTAMP_ASC,
-  SORT_BY_VOTESCORE_DESC,
-  SORT_BY_VOTESCORE_ASC
-} from '../actions';
+import { FILTER_BY_CATEGORY } from '../actions';
+import { SORT_POSTS } from '../actions/sort';
 
 const filtersReducerDefaultState = {
   category: { name: 'all', path: 'all' },
@@ -12,31 +7,17 @@ const filtersReducerDefaultState = {
 };
 
 export default (state = filtersReducerDefaultState, action) => {
+  console.log(action);
   switch (action.type) {
     case FILTER_BY_CATEGORY:
       return {
         ...state,
         category: action.category
       };
-    case SORT_BY_TIMESTAMP_DESC:
+    case SORT_POSTS:
       return {
         ...state,
-        sortBy: '-timestamp'
-      };
-    case SORT_BY_TIMESTAMP_ASC:
-      return {
-        ...state,
-        sortBy: '+timestamp'
-      };
-    case SORT_BY_VOTESCORE_DESC:
-      return {
-        ...state,
-        sortBy: '-votescore'
-      };
-    case SORT_BY_VOTESCORE_ASC:
-      return {
-        ...state,
-        sortBy: '+votescore'
+        sortBy: action.sortBy
       };
     default:
       return state;

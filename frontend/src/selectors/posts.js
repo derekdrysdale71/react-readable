@@ -5,9 +5,9 @@ export default (posts, { categories, filters }) => posts.filter((post) => {
   return all || categoryMatch;
 }).sort((a, b) => {
   if (filters.sortBy === '-timestamp') {
-    return a.timestamp < b.timestamp ? 1 : -1;
-  } else if (filters.sortBy === '+timestamp') {
     return a.timestamp > b.timestamp ? 1 : -1;
+  } else if (filters.sortBy === '+timestamp') {
+    return a.timestamp < b.timestamp ? 1 : -1;
   } else if (filters.sortBy === '-voteScore') {
     return a.voteScore < b.voteScore ? 1 : -1;
   } else if (filters.sortBy === '+voteScore') {
