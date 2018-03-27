@@ -3,23 +3,29 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CategoryList from './CategoryList';
 import PostList from './PostList';
+import { filterPosts } from '../actions/sort';
 
 class DashboardView extends Component {
+  componentWillMount() {
+    this.props.setFilter(this.props.match.params.category);
+  }
   render() {
     return (
       <div className="row">
         <div className="col-md-3"><CategoryList categories /></div>
-        <div className="col-md-9"><PostList posts /></div>
+        <div className="col"><PostList posts /></div>
       </div>
-    )
+    );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    categories: state.categories,
-    posts: state.posts
-  };
-}
+const mapStateToProps = state => ({
+  categories: state.categories,
+  posts: state.posts.posts
+});
 
-export default withRouter(connect(mapStateToProps)(DashboardView));
+const mapDispatchToProps = dispatch => ({
+  setFilter: category => dispatch(filterPosts(category))
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DashboardView));

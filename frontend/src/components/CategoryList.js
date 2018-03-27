@@ -1,43 +1,37 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { selectCategory } from '../actions';
+import { filterPosts } from '../actions/sort';
 
-class CategoryList extends Component {
-  handleSelectCategory = (category) => {
-    this.props.setCategory(category);
-  }
-  render() {
-    const { categories } = this.props.categories;
-    return (
-      <div>
-        <div>
-          <h4>Categories</h4>
-          <div className="list-group">
-            {categories.map(category => (
-              <button onClick={() => this.props.setCategory(category)} key={category.path} className="list-group-item list-group-item-action" >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
+const CategoryList = props => (
+  <div>
+    <h4 className="h4">categories</h4>
+    <div className="list-group">
+      {props.categories.map(category => (
+        <Link
+          onClick={() => props.setFilter(category.name)}
+          to={category.name !== 'all' ? `/${category.name}` : '/'}
+          key={category.path}
+          className="list-group-item list-group-item-action"
+        >
+          {category.name}
+        </Link>
+      ))}
+    </div>
+  </div>
+);
+
+CategoryList.propTypes = {
+  categories: PropTypes.array.isRequired
 };
-
-// CategoryList.propTypes = {
-//   categories: PropTypes.array.isRequired,
-//   filterFunc: PropTypes.func.isRequired,
-// };
 
 const mapStateToProps = state => ({
   categories: state.categories
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCategory: category => dispatch(selectCategory(category))
+  setFilter: category => dispatch(filterPosts(category))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryList));

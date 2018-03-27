@@ -1,20 +1,24 @@
-import { FILTER_BY_CATEGORY } from '../actions';
-import { SORT_POSTS } from '../actions/sort';
+import { FILTER_POSTS, SORT_POSTS, SORT_COMMENTS } from '../actions/sort';
 
 const filtersReducerDefaultState = {
-  category: { name: 'all', path: 'all' },
+  filter: undefined,
   sortBy: '-timestamp',
 };
 
 export default (state = filtersReducerDefaultState, action) => {
   console.log(action);
   switch (action.type) {
-    case FILTER_BY_CATEGORY:
+    case FILTER_POSTS:
       return {
         ...state,
-        category: action.category
+        filter: action.category
       };
     case SORT_POSTS:
+      return {
+        ...state,
+        sortBy: action.sortBy
+      };
+    case SORT_COMMENTS:
       return {
         ...state,
         sortBy: action.sortBy

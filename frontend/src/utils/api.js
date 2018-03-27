@@ -90,7 +90,8 @@ export const votePost = (id, option) =>
 //
 export const getComments = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers })
-    .then(res => res.json());
+    .then(res => res.json())
+    .then(comments => comments.filter(comment => !comment.deleted));
 
 export const createComment = comment =>
   fetch(`${api}/comments`, {

@@ -5,19 +5,20 @@ import { vote } from '../actions/vote';
 
 const Voter = props => (
   <div className="fr">
-    <span className="">Score: {props.score}</span>
-    <button
-      type="button"
-      className=""
+    <span className="" style={{ margin: '0 10px 0 0' }}>Score: {props.score}</span>
+    <a
+      className="btn-floating"
+      style={{ margin: '0 10px 0 0' }}
       onClick={() => props.vote(props.type, props.id, 'upVote')}
-    >+
-    </button>
-    <button
-      type="button"
-      className=""
+    >
+      <i className="fa fa-thumbs-up fa-lg" />
+    </a>
+    <a
+      className="btn-floating"
       onClick={() => props.vote(props.type, props.id, 'downVote')}
-    >-
-    </button>
+    >
+      <i className="fa fa-thumbs-down fa-lg fa-flip-horizontal" />
+    </a>
   </div>
 );
 

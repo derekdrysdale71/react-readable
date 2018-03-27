@@ -1,16 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { filterPosts } from '../actions/sort';
 
-const styles = {
-  title: {
-    cursor: 'pointer',
-  },
-};
-
-const Header = () => (
+const Header = ({ setFilter }) => (
   <nav className="navbar navbar-dark bg-dark">
-    <a href="/" className="navbar-brand">readable</a>
+    <Link
+      to="/"
+      className="navbar-brand"
+      onClick={() => setFilter(undefined)}
+    >
+      readable
+    </Link>
   </nav>
 );
 
-export default Header;
+const mapDispatchToProps = dispatch => ({
+  setFilter: category => dispatch(filterPosts(category))
+});
+
+export default connect(null, mapDispatchToProps)(Header);

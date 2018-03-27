@@ -1,6 +1,6 @@
-// Get filtered and sorted Posts
-export default ({ posts }, { filter, sortBy }) => posts.filter((post) => (
-  (filter === undefined) || (post.category === filter))
+// Get sorted comments
+export default (comments, { filter, sortBy }) => comments.filter((comment) => (
+  comment)
 ).sort((a, b) => {
   if (sortBy === '-timestamp') {
     return a.timestamp < b.timestamp ? 1 : -1;
