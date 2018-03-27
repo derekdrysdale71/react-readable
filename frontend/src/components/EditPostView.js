@@ -1,25 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createPost } from '../actions';
+import { updatePost } from '../actions';
 
-class CreateEditPostView extends Component {
-  state = {
-    category: '',
-    title: '',
-    body: '',
-    author: ''
-  }
-
-  componentDidMount() {
-    if (this.props.post !== undefined) {
-      this.setState({
-        author: this.props.post.author,
-        title: this.props.post.title,
-        body: this.props.post.body,
-        category: this.props.post.category
-      });
-    }
-  }
+class EditPostView extends Component {
+  state = { ...this.props.post }
   onTitleChange = (e) => {
     this.setState({
       title: e.target.value
@@ -32,31 +16,19 @@ class CreateEditPostView extends Component {
     });
   }
 
-  onAuthorChange = (e) => {
-    this.setState({
-      author: e.target.value
-    });
-  }
-
-  onCategoryChange = (e) => {
-    this.setState({
-      category: e.target.value
-    });
-  }
   handleAdd = (e) => {
     e.preventDefault();
     const post = {
-      category: this.state.category,
+      ...this.props.post,
       title: this.state.title,
-      body: this.state.body,
-      author: this.state.author
+      body: this.state.body
     };
-    this.props.addPost(post);
+    this.props.editPost(post);
   }
   render() {
     return (
       <div>
-        <h3>Add/Edit Post</h3>
+        <h3>Edit Post</h3>
         <form onSubmit={this.handleAdd}>
           <div className="form-group">
             <select className="form-control" value={this.props.category} onChange={this.onCategoryChange}>
@@ -71,7 +43,7 @@ class CreateEditPostView extends Component {
               type="text"
               className="form-control"
               placeholder="title"
-              value={this.state.title}
+              value={this.props.title || ''}
               onChange={this.onTitleChange}
             />
           </div>
@@ -82,15 +54,6 @@ class CreateEditPostView extends Component {
               placeholder="body"
               value={this.state.body}
               onChange={this.onBodyChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="author"
-              value={this.state.author}
-              onChange={this.onAuthorChange}
             />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
@@ -107,7 +70,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPost: post => dispatch(createPost(post))
+  editPost: post => dispatch(updatePost(post))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateEditPostView);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPostView);

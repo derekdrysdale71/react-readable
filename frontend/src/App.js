@@ -6,7 +6,8 @@ import { fetchCategories, fetchPosts } from './actions';
 
 // Import Views
 import DashboardView from './components/DashboardView';
-import CreateEditPostView from './components/CreateEditPostView';
+import CreatePostView from './components/CreatePostView';
+import EditPostView from './components/EditPostView';
 import PostDetailView from './components/PostDetailView';
 
 import Header from './components/Header';
@@ -23,10 +24,10 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={DashboardView} />
-          <Route exact path="/create" component={CreateEditPostView} />
+          <Route exact path="/new" component={CreatePostView} />
+          <Route exact path="/edit/:id" component={EditPostView} />
           <Route exact path="/:category" component={DashboardView} />
           <Route exact path="/:category/:id" component={PostDetailView} />
-          <Route exact path="/:category/:id/edit" component={CreateEditPostView} />
         </Switch>
       </div>
     );

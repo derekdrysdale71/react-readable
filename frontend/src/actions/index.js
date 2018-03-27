@@ -73,6 +73,17 @@ export const createPost = post => dispatch => (
     .then(data => dispatch(addPost(data)))
 );
 
+export const editPost = post => ({
+  type: EDIT_POST,
+  post
+});
+
+export const updatePost = post => dispatch => (
+  API
+    .editPost(post)
+    .then(data => dispatch(editPost(data)))
+);
+
 export const deletePost = post => ({
   type: DELETE_POST,
   post

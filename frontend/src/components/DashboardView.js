@@ -12,8 +12,8 @@ class DashboardView extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-3"><CategoryList categories /></div>
-        <div className="col"><PostList posts /></div>
+        <div className="col s3"><CategoryList categories /></div>
+        <div className="col s9"><PostList posts /></div>
       </div>
     );
   }

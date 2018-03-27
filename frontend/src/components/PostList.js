@@ -9,24 +9,30 @@ import { sortPosts } from '../actions/sort';
 
 class PostList extends Component {
   handleSort = (e) => {
-    console.log(e.target.value);
     this.props.setSort(e.target.value);
   };
   handleAdd = () => {
-
+    this.props.post = {};
   };
   render() {
     const { posts, match } = this.props;
+    const { category } = this.props.match.params;
     return (
-      <div>
-        <span className="row" style={{ margin: '0 0 0 2px' }}>
-          <h3 className="h3" >{match.params.category || 'all'}</h3>
-          <Link to="/create" onClick={this.handleAdd} className="btn btn-primary btn-sm">Add Post</Link>
-        </span>
+      <div style={{ margin: '15px 0 0 0' }}>
+        <div className="valign-wrapper">
+          <h4 style={{ margin: '0 5px 0 0' }}>{category || 'all'}</h4>
+          <Link
+            to="/new"
+            onClick={this.handleAdd}
+            className="btn-floating waves-effect waves-light red"
+          >
+            <i className="material-icons">add</i>
+          </Link>
+        </div>
         <div>
           <Sorter handleSort={this.handleSort} />
-          <div className="list-group">
-            {posts.map(post => <Post key={post.id} {...post} className="list-group-item list-group-item-action" />)}
+          <div>
+            {posts.map(post => <Post key={post.id} {...post} />)}
           </div>
         </div>
       </div>
@@ -36,7 +42,8 @@ class PostList extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: filteredPosts(state.posts, state.filters)
+  posts: filteredPosts(state.posts, state.filters),
+  post: state.posts.post
 });
 
 const mapDispatchToProps = dispatch => ({

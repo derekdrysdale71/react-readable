@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -6,12 +7,16 @@ import Voter from './Voter';
 import { removePost } from '../actions';
 
 class PostDetail extends Component {
+  handleEditPost = () => {
+
+  }
+
   handleDeletePost = () => {
     this.props.deletePost(this.props.post.id);
     this.props.history.push('/');
   }
   render() {
-    const post = this.props.post;
+    const { post } = this.props;
     return (
       <div className="card">
         <div className="card-header">
@@ -25,8 +30,10 @@ class PostDetail extends Component {
           <Voter type="post" id={post.id} score={post.voteScore} />
           <div className="">Comments: {post.commentCount}</div>
           <span>
-            <button>Edit</button>
-            <button onClick={this.handleDeletePost}>Delete</button>
+            <Link to={`/edit/${post.id}`}>
+              <button className="btn btn-default btn-sm"><i className="fa fa-edit fa-large" />Edit</button>
+            </Link>
+            <button className="btn btn-default btn-sm" onClick={this.handleDeletePost}>Delete</button>
           </span>
         </div>
       </div>

@@ -6,14 +6,14 @@ import { filterPosts } from '../actions/sort';
 
 const CategoryList = props => (
   <div>
-    <h4 className="h4">categories</h4>
-    <div className="list-group">
+    <h4>categories</h4>
+    <div className="collection">
       {props.categories.map(category => (
         <Link
           onClick={() => props.setFilter(category.name)}
           to={category.name !== 'all' ? `/${category.name}` : '/'}
           key={category.path}
-          className="list-group-item list-group-item-action"
+          className="collection-item"
         >
           {category.name}
         </Link>

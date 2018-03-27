@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Comment from './Comment';
@@ -18,6 +18,13 @@ class CommentList extends Component {
       <div>
         <div className="list-group">
           <h3>Comments</h3>
+          <Link
+            to="/new"
+            onClick={this.handleAdd}
+            className="btn-floating waves-effect waves-light red"
+          >
+            <i className="material-icons">add</i>
+          </Link>
           <Sorter handleSort={this.handleSort} />
           {comments.map(comment => <Comment key={comment.id} {...comment} className="list-group-item list-group-item-action" />)}
         </div>
