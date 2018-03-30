@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const Sorter = ({ handleSort }) => (
+const SorterNew = ({ handleSort }) => (
   <div className="right">
     <div className="valign-wrapper">
       <p>Sort By:</p>
@@ -35,8 +35,8 @@ const Sorter = ({ handleSort }) => (
   </div>
 );
 
-Sorter.propTypes = {
+SorterNew.propTypes = {
   handleSort: PropTypes.func.isRequired
 };
 
-export default connect()(Sorter);
+export default connect()(SorterNew);
