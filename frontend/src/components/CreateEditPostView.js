@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createPost } from '../actions';
+import { createPost, updatePost } from '../actions';
 
-class CreatePostView extends Component {
+class CreateEditPostView extends Component {
   state = {
+    isEditing: false,
+    id: '',
     category: '',
     title: '',
     body: '',
@@ -11,14 +14,25 @@ class CreatePostView extends Component {
   }
 
   componentDidMount() {
-    if (this.props.post !== undefined) {
+    if (this.props.post.id) {
       this.setState({
+        id: this.props.post.id,
         author: this.props.post.author,
         title: this.props.post.title,
         body: this.props.post.body,
-        category: this.props.post.category
+      });
+    } else {
+      this.setState({
+        id: this.props.location.state.postId,
+        title: this.props.location.state.postTitle,
+        body: this.props.location.state.postBody,
+        author: this.props.location.state.postAuthor
       });
     }
+    this.setState({
+      isEditing: this.props.location.state.isEditing,
+      category: this.props.location.state.category
+    });
   }
   onTitleChange = (e) => {
     this.setState({
@@ -43,7 +57,7 @@ class CreatePostView extends Component {
       category: e.target.value
     });
   }
-  handleAdd = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const post = {
       category: this.state.category,
@@ -51,16 +65,24 @@ class CreatePostView extends Component {
       body: this.state.body,
       author: this.state.author
     };
-    this.props.addPost(post);
+    if (this.state.isEditing) {
+      post.id = this.state.id;
+      console.log('Edited Post:', post);
+      this.props.editPost(post);
+    } else {
+      this.props.addPost(post);
+    }
+    this.props.history.push(this.props.location.state.previousPath);
   }
   render() {
+    const formHeader = this.state.isEditing ? 'Edit Post' : 'Add Post';
     return (
       <div>
-        <h3>Create New Post</h3>
-        <form onSubmit={this.handleAdd}>
+        <h4>{formHeader}</h4>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <select className="form-control" value={this.props.category} onChange={this.onCategoryChange}>
-              {this.props.category || <option key="" value="">category</option>}
+            <select className="browser-default" value={this.state.category} onChange={this.onCategoryChange}>
+              {this.state.category || <option key="" value="">category</option>}
               {this.props.categories.map(category => (
                 <option key={category.path} value={category.name}>{category.name}</option>
               ))}
@@ -91,12 +113,13 @@ class CreatePostView extends Component {
               placeholder="author"
               value={this.state.author || ''}
               onChange={this.onAuthorChange}
+              disabled={this.state.isEditing}
             />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
           <a href="/" id="cancel" name="cancel" className="btn btn-secondary">Cancel</a>
-        </form >
-      </div >
+        </form>
+      </div>
     );
   }
 }
@@ -107,7 +130,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPost: post => dispatch(createPost(post))
+  addPost: post => dispatch(createPost(post)),
+  editPost: post => dispatch(updatePost(post))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePostView);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateEditPostView));

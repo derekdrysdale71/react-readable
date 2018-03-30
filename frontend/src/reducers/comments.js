@@ -1,4 +1,4 @@
-import { GET_COMMENTS } from '../actions';
+import { GET_COMMENTS, CREATE_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions';
 import { VOTE_COMMENT } from '../actions/vote';
 
 export default (state = [], action) => {
@@ -7,6 +7,20 @@ export default (state = [], action) => {
       return [
         ...action.comments
       ];
+    case CREATE_COMMENT:
+      return state.concat(action.comment);
+    case EDIT_COMMENT:
+      return state.map(comment =>
+        (comment.id === action.comment.id)
+          ? {
+            ...comment,
+            body: action.comment.body,
+            timestamp: action.comment.timestamp
+          }
+          : comment
+      );
+    case DELETE_COMMENT:
+      return state.filter(comment => (comment.id !== action.comment.id));
     case VOTE_COMMENT:
       return state.map(comment =>
         ((comment.id === action.comment.id)

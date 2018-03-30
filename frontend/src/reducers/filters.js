@@ -6,7 +6,6 @@ const filtersReducerDefaultState = {
 };
 
 export default (state = filtersReducerDefaultState, action) => {
-  console.log(action);
   switch (action.type) {
     case FILTER_POSTS:
       return {

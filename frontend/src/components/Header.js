@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { filterPosts } from '../actions/sort';
 
 const Header = ({ setFilter }) => (
-  <nav>
+  <nav className="blue-grey darken-1">
     <div className="nav-wrapper">
       <Link
         to="/"
         className="brand-logo left"
         onClick={() => setFilter(undefined)}
       >
+        <i className="material-icons">developer_mode</i>
         readable
     </Link>
     </div>

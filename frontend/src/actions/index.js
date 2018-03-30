@@ -84,9 +84,9 @@ export const updatePost = post => dispatch => (
     .then(data => dispatch(editPost(data)))
 );
 
-export const deletePost = post => ({
+export const deletePost = id => ({
   type: DELETE_POST,
-  post
+  id
 });
 
 export const removePost = post => dispatch => (
@@ -108,4 +108,37 @@ export const fetchComments = parentId => dispatch => (
   API
     .getComments(parentId)
     .then(data => dispatch(getComments(parentId, data)))
+);
+
+export const addComment = comment => ({
+  type: CREATE_COMMENT,
+  comment
+});
+
+export const createComment = comment => dispatch => (
+  API
+    .createComment(comment)
+    .then(data => dispatch(addComment(data)))
+);
+
+export const editComment = comment => ({
+  type: EDIT_COMMENT,
+  comment
+});
+
+export const updateComment = comment => dispatch => (
+  API
+    .editComment(comment.id, comment.body)
+    .then(data => dispatch(editComment(data)))
+);
+
+export const deleteComment = comment => ({
+  type: DELETE_COMMENT,
+  comment
+});
+
+export const removeComment = comment => dispatch => (
+  API
+    .deleteComment(comment.id)
+    .then(dispatch(deleteComment(comment)))
 );

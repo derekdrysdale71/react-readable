@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const Sorter = props => (
-    <div style={{ margin: '0 0 5px 2px' }}>
-        <span className="" style={{ margin: '0 5px 0 0' }}>Sort by:</span>
-        <select defaultValue="-timestamp" onChange={props.handleSort}>
-            <option value="-timestamp">Timestamp Desc</option>
-            <option value="+timestamp">Timestamp Asc</option>
-            <option value="-voteScore">VoteScore Desc</option>
-            <option value="+voteScore">VoteScore Asc</option>
-        </select>
+const Sorter = ({ handleSort }) => (
+    <div className="valign-wrapper">
+        <p className="col">Sort by:</p>
+        <div className="col">
+            <select className="browser-default" defaultValue="-timestamp" onChange={handleSort}>
+                <option value="-timestamp">Timestamp Desc</option>
+                <option value="+timestamp">Timestamp Asc</option>
+                <option value="-voteScore">VoteScore Desc</option>
+                <option value="+voteScore">VoteScore Asc</option>
+            </select>
+        </div>
     </div>
 );
 

@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
+import CreateEditCommentView from './CreateEditCommentView';
 import PostDetail from './PostDetail';
 import CommentList from './CommentList';
 import { fetchPost, fetchComments } from '../actions';
 
 class PostDetailView extends Component {
   componentDidMount() {
-    this.props.getPost(this.props.match.params.id);
-    this.props.getComments(this.props.match.params.id);
+    if (this.props.match.params.post_id) {
+      this.props.getPost(this.props.match.params.post_id);
+      this.props.getComments(this.props.match.params.post_id);
+    }
   }
 
   render() {
-    const postDetail = this.props.post;
-    console.log(postDetail);
+    if (this.props.post.id) {
+      return (
+        <div className="row">
+          <h4 className="col-md-12">Post Details</h4>
+          <div className="col-md-12"><PostDetail /></div>
+          <div className="col-md-12"><CommentList comments /></div>
+        </div>
+      );
+    }
     return (
-      <div className="row">
-        <h3 className="col-md-12">Post Details</h3>
-        <div className="col-md-12"><PostDetail /></div>
-        <div className="col-md-12"><CommentList comments /></div>
+      <div>
+        <h4>404 - This post doesn't exist</h4>
       </div>
     );
   }
@@ -31,12 +39,11 @@ PostDetailView.propTypes = {
 };
 
 function mapStateToProps({ posts, comments }) {
-  console.log(posts.post);
   return {
     post: posts.post,
     comments
   };
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   getPost: id => dispatch(fetchPost(id)),

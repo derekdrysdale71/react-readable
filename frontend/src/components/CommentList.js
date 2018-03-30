@@ -3,30 +3,34 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Comment from './Comment';
+import CreateEditCommentView from './CreateEditCommentView';
 import sortedComments from '../selectors/comments';
 import Sorter from './Sorter';
 import { sortComments } from '../actions/sort';
 
 class CommentList extends Component {
   handleSort = (e) => {
-    console.log(e.target.value);
     this.props.setSort(e.target.value);
   };
   render() {
-    const { comments } = this.props;
+    const { match, comments } = this.props;
+    const url = match.url;
     return (
-      <div>
-        <div className="list-group">
-          <h3>Comments</h3>
+      <div style={{ margin: '15px 0 0 0' }}>
+        <div className="valign-wrapper">
+          <h4 style={{ margin: '0 5px 0 0' }}>Comments</h4>
           <Link
-            to="/new"
+            to={`${match.url}/new`}
+            state={{ prevPath: this.props.location.pathname }}
             onClick={this.handleAdd}
             className="btn-floating waves-effect waves-light red"
           >
             <i className="material-icons">add</i>
           </Link>
           <Sorter handleSort={this.handleSort} />
-          {comments.map(comment => <Comment key={comment.id} {...comment} className="list-group-item list-group-item-action" />)}
+        </div>
+        <div>
+          {comments.map(comment => <Comment key={comment.id} comment={comment} className="list-group-item list-group-item-action" />)}
         </div>
       </div>
     );
@@ -45,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
   setSort: option => dispatch(sortComments(option))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentList));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CommentList));

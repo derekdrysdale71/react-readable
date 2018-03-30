@@ -34,4 +34,4 @@ const mapDispatchToProps = dispatch => ({
   setFilter: category => dispatch(filterPosts(category))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryList));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CategoryList));
