@@ -17,7 +17,7 @@ const Comment = props => (
       <div className="card-action">
         <Link
           to={{
-            pathname: `/edit/${props.match.params.category}/${props.match.params.id}/${props.comment.id}`, state: {
+            pathname: `/edit/${props.match.params.category}/${props.match.params.post_id}/${props.comment.id}`, state: {
               isEditing: true,
               id: props.comment.id,
               body: props.comment.body,

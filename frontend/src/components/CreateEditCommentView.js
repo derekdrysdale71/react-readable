@@ -77,7 +77,7 @@ class CreateEditCommentView extends Component {
             />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
-          <a id="cancel" name="cancel" className="btn btn-secondary">Cancel</a>
+          <button id="cancel" name="cancel" className="btn btn-secondary">Cancel</button>
         </form>
       </div>
     );
