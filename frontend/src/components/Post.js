@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import Voter from './Voter';
 import { removePost } from '../actions';
+import { dateFormat } from '../utils/helpers';
 
 class Post extends Component {
   handleDeletePost = () => {
@@ -23,7 +23,7 @@ class Post extends Component {
           >
             {title}
           </Link>
-          <p>Author: {author} - Date: {moment(timestamp).format('MMM-DD-YYYY hh:mma')}</p>
+          <p>Author: {author} - Date: {dateFormat(timestamp)}</p>
           <Voter type="post" id={id} score={voteScore} />
           <div className="">Comments: {commentCount}</div>
         </div>
@@ -33,13 +33,12 @@ class Post extends Component {
               pathname: `/edit/${id}`,
               state: {
                 isEditing: true,
-                category: category,
+                category,
                 previousPath: match.url,
                 postId: id,
                 postTitle: title,
                 postBody: body,
                 postAuthor: author,
-                previousPath: match.url
               }
             }}
           >

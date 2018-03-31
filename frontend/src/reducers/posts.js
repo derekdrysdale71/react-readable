@@ -27,7 +27,7 @@ export default (state = defaultPostsState, action) => {
     case EDIT_POST:
       return {
         ...state,
-        posts: posts.map(post => {
+        posts: posts.map((post) => {
           if (post.id === action.post.id) {
             return action.post;
           }

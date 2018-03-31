@@ -36,7 +36,6 @@ class CreateEditCommentView extends Component {
   }
 
   handleAdd = (e) => {
-    console.log('State:', this.state);
     e.preventDefault();
     const { category, post_id } = this.props.match.params;
     const comment = {

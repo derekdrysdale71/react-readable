@@ -2,22 +2,23 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import Voter from './Voter';
 import { removeComment } from '../actions';
+import { dateFormat } from '../utils/helpers';
 
 const Comment = props => (
   <div className="card">
     <div className="card-content">
       <span className="card-title">{props.comment.body}</span>
-      <p>Author: {props.comment.author} - Date: {moment(props.comment.timestamp).format('MMM-DD-YYYY hh:mma')}</p>
+      <p>Author: {props.comment.author} - Date: {dateFormat(props.comment.timestamp)}</p>
       <Voter type="comment" id={props.comment.id} score={props.comment.voteScore} />
     </div>
     <div>
       <div className="card-action">
         <Link
           to={{
-            pathname: `/edit/${props.match.params.category}/${props.match.params.post_id}/${props.comment.id}`, state: {
+            pathname: `/edit/${props.match.params.category}/${props.match.params.post_id}/${props.comment.id}`,
+            state: {
               isEditing: true,
               id: props.comment.id,
               body: props.comment.body,
