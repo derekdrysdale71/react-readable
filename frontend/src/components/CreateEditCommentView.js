@@ -12,12 +12,13 @@ class CreateEditCommentView extends Component {
   }
 
   componentDidMount() {
+    const { isEditing, id, body, author } = this.props.location.state;
     if (this.props.location.state) {
       this.setState({
-        isEditing: this.props.location.state.isEditing || false,
-        id: this.props.location.state.id,
-        body: this.props.location.state.body || '',
-        author: this.props.location.state.author || ''
+        isEditing: isEditing || false,
+        id,
+        body: body || '',
+        author: author || ''
       });
     }
     this.setState({ parentId: this.props.post.id });

@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { filterPosts } from '../actions';
 
-const CategoryList = props => (
+const CategoryList = ({ categories, setFilter, }) => (
   <div>
     <h4>categories</h4>
     <div className="collection">
-      {props.categories.map(category => (
+      {categories.map(category => (
         <Link
-          onClick={() => props.setFilter(category.name)}
+          onClick={() => setFilter(category.name)}
           to={category.name !== 'all' ? `/${category.name}` : '/'}
           key={category.path}
           className="collection-item"
@@ -23,7 +23,8 @@ const CategoryList = props => (
 );
 
 CategoryList.propTypes = {
-  categories: PropTypes.array.isRequired
+  categories: PropTypes.array.isRequired,
+  setFilter: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
