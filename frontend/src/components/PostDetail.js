@@ -9,7 +9,7 @@ import { removePost } from '../actions';
 class PostDetail extends Component {
   handleDeletePost = () => {
     this.props.deletePost(this.props.post.id);
-    this.props.history.push(`/`);
+    this.props.history.push('/');
   }
   render() {
     const { id, category, title, body, author, timestamp, voteScore, commentCount } = this.props.post;
@@ -30,7 +30,7 @@ class PostDetail extends Component {
                 pathname: `/edit/${id}`,
                 state: {
                   isEditing: true,
-                  category: category,
+                  category,
                   previousPath: match.url
                 }
               }}

@@ -18,6 +18,7 @@ class Post extends Component {
       <div className="card">
         <div className="card-content">
           <Link
+            style={{ color: 'black', textDecoration: 'none' }}
             className="card-title"
             to={`/${category}/${id}`}
           >
