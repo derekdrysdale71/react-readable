@@ -7,7 +7,7 @@ import PostList from './PostList';
 import { filterPosts } from '../actions';
 
 class DashboardView extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.setFilter(this.props.match.params.category);
   }
   render() {

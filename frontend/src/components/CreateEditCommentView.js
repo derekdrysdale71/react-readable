@@ -50,11 +50,9 @@ class CreateEditCommentView extends Component {
       body: this.state.body,
       author: this.state.author
     };
-    console.log('Comment:', comment);
     if (this.state.isEditing) {
       this.props.editComment(comment);
     } else {
-      console.log('add comment attempt');
       this.props.addComment(comment);
     }
     this.props.history.push(`/${category}/${post_id}`);
