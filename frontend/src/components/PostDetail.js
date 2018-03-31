@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import Voter from './Voter';
 import { removePost } from '../actions';
+import { dateFormat } from '../utils/helpers';
 
 class PostDetail extends Component {
   handleDeletePost = () => {
@@ -12,15 +12,15 @@ class PostDetail extends Component {
     this.props.history.push('/');
   }
   render() {
-    const { id, category, title, body, author, timestamp, voteScore, commentCount } = this.props.post;
-    const { match } = this.props;
+    const { match, post } = this.props;
+    const { id, category, title, body, author, timestamp, voteScore, commentCount } = post;
     return (
       <div className="row">
         <div className="card">
           <div className="card-content">
             <span style={{ fontSize: '2rem' }} className="card-title">{title}</span>
             <p style={{ margin: '0 0 15px 0', fontSize: '1.5rem' }}>{body}</p>
-            <p className="card-text">Author: {author} - Date: {moment(timestamp).format('MMM-DD-YYYY hh:mma')}</p>
+            <p className="card-text">Author: {author} - Date: {dateFormat(timestamp)}</p>
             <Voter type="post" id={id} score={voteScore} />
             <p>Comments: {commentCount}</p>
           </div>
@@ -31,7 +31,11 @@ class PostDetail extends Component {
                 state: {
                   isEditing: true,
                   category,
-                  previousPath: match.url
+                  previousPath: match.url,
+                  postId: id,
+                  postTitle: title,
+                  postBody: body,
+                  postAuthor: author,
                 }
               }}
             >
@@ -48,14 +52,9 @@ class PostDetail extends Component {
 }
 
 PostDetail.propTypes = {
-  id: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  timestamp: PropTypes.number.isRequired,
-  voteScore: PropTypes.number.isRequired,
-  commentCount: PropTypes.number.isRequired,
+  match: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   deletePost: PropTypes.func.isRequired
 };
 

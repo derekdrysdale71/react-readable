@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { createPost, updatePost } from '../actions';
 
 class CreateEditPostView extends Component {
@@ -13,25 +14,14 @@ class CreateEditPostView extends Component {
     author: ''
   }
 
-  componentDidMount() {
-    if (this.props.post.id) {
-      this.setState({
-        id: this.props.post.id,
-        author: this.props.post.author,
-        title: this.props.post.title,
-        body: this.props.post.body,
-      });
-    } else {
-      this.setState({
-        id: this.props.location.state.postId,
-        title: this.props.location.state.postTitle,
-        body: this.props.location.state.postBody,
-        author: this.props.location.state.postAuthor
-      });
-    }
+  componentWillMount() {
     this.setState({
       isEditing: this.props.location.state.isEditing,
-      category: this.props.location.state.category
+      category: this.props.location.state.category,
+      id: this.props.location.state.postId,
+      title: this.props.location.state.postTitle,
+      body: this.props.location.state.postBody,
+      author: this.props.location.state.postAuthor
     });
   }
   onTitleChange = (e) => {
@@ -67,7 +57,6 @@ class CreateEditPostView extends Component {
     };
     if (this.state.isEditing) {
       post.id = this.state.id;
-      console.log('Edited Post:', post);
       this.props.editPost(post);
     } else {
       this.props.addPost(post);
@@ -124,8 +113,15 @@ class CreateEditPostView extends Component {
   }
 }
 
+CreateEditPostView.propTypes = {
+  location: PropTypes.object.isRequired,
+  editPost: PropTypes.func.isRequired,
+  addPost: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
+  history: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
-  post: state.posts.post,
   categories: state.categories
 });
 
