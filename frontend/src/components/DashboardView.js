@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CategoryList from './CategoryList';
 import PostList from './PostList';
-import { filterPosts } from '../actions/sort';
+import { filterPosts } from '../actions';
 
 class DashboardView extends Component {
   componentWillMount() {

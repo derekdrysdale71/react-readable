@@ -1,7 +1,5 @@
 import * as API from '../utils/api';
-
-export const VOTE_POST = 'VOTE_POST';
-export const VOTE_COMMENT = 'VOTE_COMMENT';
+import { VOTE_POST, VOTE_COMMENT } from './types';
 
 // Actions
 export const votePost = post => ({

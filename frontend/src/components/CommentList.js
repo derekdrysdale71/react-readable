@@ -3,10 +3,9 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Comment from './Comment';
-import CreateEditCommentView from './CreateEditCommentView';
 import sortedComments from '../selectors/comments';
 import Sorter from './Sorter';
-import { sortComments } from '../actions/sort';
+import { sortComments } from '../actions';
 
 class CommentList extends Component {
   handleSort = (e) => {

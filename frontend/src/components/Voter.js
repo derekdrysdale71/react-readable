@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { vote } from '../actions/vote';
+import { vote } from '../actions';
 
 const Voter = props => (
   <div className="valign-wrapper">

@@ -5,7 +5,7 @@ import Sorter from './Sorter';
 import SorterNew from './SorterNew';
 import Post from './Post';
 import filteredPosts from '../selectors/posts';
-import { sortPosts } from '../actions/sort';
+import { sortPosts } from '../actions';
 
 
 class PostList extends Component {

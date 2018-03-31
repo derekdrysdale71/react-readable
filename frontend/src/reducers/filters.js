@@ -1,4 +1,4 @@
-import { FILTER_POSTS, SORT_POSTS, SORT_COMMENTS } from '../actions/sort';
+import { FILTER_POSTS, SORT_POSTS, SORT_COMMENTS } from '../actions/types';
 
 const filtersReducerDefaultState = {
   filter: undefined,

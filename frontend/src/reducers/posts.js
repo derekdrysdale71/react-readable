@@ -1,5 +1,13 @@
-import { GET_POST, GET_POSTS, CREATE_POST, EDIT_POST, DELETE_POST, CREATE_COMMENT, DELETE_COMMENT } from '../actions';
-import { VOTE_POST } from '../actions/vote';
+import {
+  GET_POST,
+  GET_POSTS,
+  CREATE_POST,
+  EDIT_POST,
+  DELETE_POST,
+  CREATE_COMMENT,
+  DELETE_COMMENT,
+  VOTE_POST
+} from '../actions/types';
 
 const defaultPostsState = {
   posts: [],

@@ -1,6 +1,4 @@
-export const FILTER_POSTS = 'FILTER_POSTS';
-export const SORT_POSTS = 'SORT_POSTS';
-export const SORT_COMMENTS = 'SORT_COMMENTS';
+import { FILTER_POSTS, SORT_POSTS, SORT_COMMENTS } from './types';
 
 // Actions
 export const filterPosts = category => ({

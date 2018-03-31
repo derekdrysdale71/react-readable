@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { filterPosts } from '../actions/sort';
+import { filterPosts } from '../actions';
 
 const CategoryList = props => (
   <div>

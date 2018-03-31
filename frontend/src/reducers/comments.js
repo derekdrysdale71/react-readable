@@ -1,5 +1,4 @@
-import { GET_COMMENTS, CREATE_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions';
-import { VOTE_COMMENT } from '../actions/vote';
+import { GET_COMMENTS, CREATE_COMMENT, EDIT_COMMENT, DELETE_COMMENT, VOTE_COMMENT } from '../actions/types';
 
 export default (state = [], action) => {
   switch (action.type) {

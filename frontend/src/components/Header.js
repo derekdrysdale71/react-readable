@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { filterPosts } from '../actions/sort';
+import { filterPosts } from '../actions';
 
 const Header = ({ setFilter }) => (
   <nav className="blue-grey darken-1">
