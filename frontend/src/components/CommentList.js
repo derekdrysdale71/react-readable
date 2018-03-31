@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -29,9 +29,9 @@ const CommentList = ({ setSort, match, comments, location }) => (
 
 CommentList.propTypes = {
   comments: PropTypes.array.isRequired,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
   setSort: PropTypes.func.isRequired,
-  match: PropTypes.string.isRequired
+  match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
