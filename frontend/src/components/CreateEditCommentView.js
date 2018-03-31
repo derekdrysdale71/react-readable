@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { createComment, updateComment } from '../actions';
 
 class CreateEditCommentView extends Component {
@@ -11,9 +13,10 @@ class CreateEditCommentView extends Component {
     isEditing: false
   }
 
-  componentDidMount() {
-    const { isEditing, id, body, author } = this.props.location.state;
-    if (this.props.location.state) {
+  componentWillMount() {
+    const { isEditing = false } = this.props.location.state;
+    if (isEditing) {
+      const { id, body, author } = this.props.location.state;
       this.setState({
         isEditing: isEditing || false,
         id,
@@ -21,7 +24,9 @@ class CreateEditCommentView extends Component {
         author: author || ''
       });
     }
-    this.setState({ parentId: this.props.post.id });
+    this.setState({
+      parentId: this.props.post.id
+    });
   }
 
   onBodyChange = (e) => {
@@ -45,9 +50,11 @@ class CreateEditCommentView extends Component {
       body: this.state.body,
       author: this.state.author
     };
+    console.log('Comment:', comment);
     if (this.state.isEditing) {
       this.props.editComment(comment);
     } else {
+      console.log('add comment attempt');
       this.props.addComment(comment);
     }
     this.props.history.push(`/${category}/${post_id}`);
@@ -84,6 +91,15 @@ class CreateEditCommentView extends Component {
   }
 }
 
+CreateEditCommentView.propTypes = {
+  location: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  addComment: PropTypes.func.isRequired,
+  editComment: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
   post: state.posts.post
 });
@@ -93,4 +109,4 @@ const mapDispatchToProps = dispatch => ({
   editComment: comment => dispatch(updateComment(comment))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateEditCommentView);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateEditCommentView));

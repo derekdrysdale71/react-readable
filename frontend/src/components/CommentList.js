@@ -12,9 +12,13 @@ const CommentList = ({ setSort, match, comments, location }) => (
     <div className="valign-wrapper">
       <h4 style={{ margin: '0 5px 0 0' }}>Comments</h4>
       <Link
-        to={`${match.url}/new`}
-        state={{ prevPath: location.pathname }}
-        onClick={this.handleAdd}
+        to={{
+          pathname: `/${match.params.category}/${match.params.post_id}/new`,
+          state: {
+            isEditing: false,
+            previousPath: match.url
+          }
+        }}
         className="btn-floating waves-effect waves-light red"
       >
         <i className="material-icons">add</i>

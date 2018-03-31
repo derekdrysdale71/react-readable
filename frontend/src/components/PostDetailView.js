@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
-import CreateEditCommentView from './CreateEditCommentView';
+import { withRouter } from 'react-router-dom';
 import PostDetail from './PostDetail';
 import CommentList from './CommentList';
 import { fetchPost, fetchComments } from '../actions';
@@ -50,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
   getComments: id => dispatch(fetchComments(id))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostDetailView));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PostDetailView));

@@ -15,13 +15,14 @@ class CreateEditPostView extends Component {
   }
 
   componentWillMount() {
+    const { isEditing, category, postId, postTitle, postBody, postAuthor } = this.props.location.state;
     this.setState({
-      isEditing: this.props.location.state.isEditing,
-      category: this.props.location.state.category,
-      id: this.props.location.state.postId,
-      title: this.props.location.state.postTitle,
-      body: this.props.location.state.postBody,
-      author: this.props.location.state.postAuthor
+      isEditing,
+      category,
+      id: postId,
+      title: postTitle,
+      body: postBody,
+      author: postAuthor
     });
   }
   onTitleChange = (e) => {
